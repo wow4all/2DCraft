@@ -1,0 +1,11 @@
+C:\Users\sgzfx\Documents\Visual Studio 2008\Projects\Shadoza\Shadoza\bin\Debug\csfml-graphics.dll
+C:\Users\sgzfx\Documents\Visual Studio 2008\Projects\Shadoza\Shadoza\bin\Debug\csfml-window.dll
+C:\Users\sgzfx\Documents\Visual Studio 2008\Projects\Shadoza\Shadoza\bin\Debug\sfmlnet-audio.dll
+C:\Users\sgzfx\Documents\Visual Studio 2008\Projects\Shadoza\Shadoza\bin\Debug\sfmlnet-graphics.dll
+C:\Users\sgzfx\Documents\Visual Studio 2008\Projects\Shadoza\Shadoza\bin\Debug\sfmlnet-window.dll
+C:\Users\sgzfx\Documents\Visual Studio 2008\Projects\Shadoza\Shadoza\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\sgzfx\Documents\Visual Studio 2008\Projects\Shadoza\Shadoza\bin\Debug\2DCraft.exe.config
+C:\Users\sgzfx\Documents\Visual Studio 2008\Projects\Shadoza\Shadoza\bin\Debug\2DCraft.exe
+C:\Users\sgzfx\Documents\Visual Studio 2008\Projects\Shadoza\Shadoza\bin\Debug\2DCraft.pdb
+C:\Users\sgzfx\Documents\Visual Studio 2008\Projects\Shadoza\Shadoza\obj\Debug\2DCraft.exe
+C:\Users\sgzfx\Documents\Visual Studio 2008\Projects\Shadoza\Shadoza\obj\Debug\2DCraft.pdb
