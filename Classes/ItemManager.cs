@@ -5,8 +5,8 @@ using System.Text;
 
 namespace _2DCraft
 {
-    static class ItemManager
-    {
-
-    }
+	static class ItemManager
+	{
+		
+	}
 }
