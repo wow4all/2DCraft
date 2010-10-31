@@ -24,8 +24,14 @@ namespace _2DCraft
 			wnd.EnableKeyRepeat(false);
 			wnd.ShowMouseCursor(true);
 
-			Properties.GetProperty("Directory=");
-			Properties.GetProperty("Directory=");
+			FileSystem.Directory = Properties.GetProperty("Directory=");
+
+			if (!FileSystem.LoadItems())
+			{
+				System.Windows.Forms.MessageBox.Show("items.txt was not found.\r\nCreated it.", "Fatal Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+
+				return;
+			}
 
 			while (wnd.IsOpened())
 			{
