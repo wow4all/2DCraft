@@ -81,7 +81,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CraftManager.cs" />
+    <Compile Include="GameManager.cs" />
+    <Compile Include="KeyboardManager.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="ItemManager.cs" />
+    <Compile Include="MapManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="csfml-graphics.dll">
