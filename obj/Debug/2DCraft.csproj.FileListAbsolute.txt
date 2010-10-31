@@ -1,3 +1,14 @@
 C:\Users\sgzfx\Desktop\Git_Repos\2DCraft\bin\Debug\2DCraft.exe.config
 C:\Users\sgzfx\Desktop\Git_Repos\2DCraft\obj\Debug\2DCraft.exe
 C:\Users\sgzfx\Desktop\Git_Repos\2DCraft\obj\Debug\2DCraft.pdb
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Debug\2DCraft.exe.config
+D:\Coding Projects(Private)\CSharp\2DCraft\obj\Debug\2DCraft.exe
+D:\Coding Projects(Private)\CSharp\2DCraft\obj\Debug\2DCraft.pdb
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Debug\csfml-graphics.dll
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Debug\csfml-window.dll
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Debug\2DCraft.exe
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Debug\2DCraft.pdb
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Debug\sfmlnet-audio.dll
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Debug\sfmlnet-graphics.dll
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Debug\sfmlnet-window.dll
+D:\Coding Projects(Private)\CSharp\2DCraft\obj\Debug\ResolveAssemblyReference.cache

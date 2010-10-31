@@ -1,0 +1,11 @@
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Release\2DCraft.exe.config
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Release\csfml-graphics.dll
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Release\csfml-window.dll
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Release\2DCraft.exe
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Release\2DCraft.pdb
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Release\sfmlnet-audio.dll
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Release\sfmlnet-graphics.dll
+D:\Coding Projects(Private)\CSharp\2DCraft\bin\Release\sfmlnet-window.dll
+D:\Coding Projects(Private)\CSharp\2DCraft\obj\Release\ResolveAssemblyReference.cache
+D:\Coding Projects(Private)\CSharp\2DCraft\obj\Release\2DCraft.exe
+D:\Coding Projects(Private)\CSharp\2DCraft\obj\Release\2DCraft.pdb

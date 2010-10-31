@@ -5,7 +5,6 @@ using SFML.Graphics;
 using SFML.Window;
 using System.Diagnostics;
 using System.Media;
-using SFML.Graphics;
 
 namespace _2DCraft
 {
