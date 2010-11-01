@@ -87,7 +87,6 @@
     <Compile Include="Classes\Inventory.cs" />
     <Compile Include="Classes\Item.cs" />
     <Compile Include="Classes\Properties.cs" />
-    <Compile Include="CraftManager.cs" />
     <Compile Include="Classes\GameManager.cs" />
     <Compile Include="Classes\KeyboardManager.cs" />
     <Compile Include="Main.cs" />
