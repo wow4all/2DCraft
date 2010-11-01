@@ -151,7 +151,7 @@ namespace _2DCraft
 
 		#endregion
 
-		public Item(string textureLocation, int x = 0, int y = 0, float speed = 1, float friction = 1, string IName = "DefaultItem", int MTime = 1, int SAmount = 64, int FChance = 100, string FString = "Mining", int MNTime = 0, int MXTime = 24, bool canFind = true, bool deleteOnCraft = true, string MSound = "default", string MDSound = "itemfound", string RItem = "none")
+		public Item(string textureLocation, int x = 0, int y = 0, int width = 16, int height = 16, float speed = 1, float friction = 1, string IName = "DefaultItem", int MTime = 1, int SAmount = 64, int FChance = 100, string FString = "Mining", int MNTime = 0, int MXTime = 24, bool canFind = true, bool deleteOnCraft = true, string MSound = "default", string MDSound = "itemfound", string RItem = "none")
 		{
 			this.pos = new Position();
 			this.pos.X = x;

@@ -50,6 +50,7 @@ namespace _2DCraft
 					if (line.ToLower().StartsWith(propertyName.ToLower()))
 					{
 						output = line.Remove(0, propertyName.Length);
+						output = output.Replace("\r", "");
 						loadedProperties.Add(propertyName);
 
 						break;
