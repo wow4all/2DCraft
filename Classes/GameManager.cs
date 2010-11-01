@@ -2,16 +2,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SFML.Graphics;
 
 namespace _2DCraft
 {
-    class GameManager
+    static class GameManager
     {
-        public enum GameState
+        public static Font fPixel = new Font("Resources/Fonts/volter.ttf");
+        public static gState GameState;
+        public static List<Menu> GameMenus;
+        public static Menu ActiveMenu;
+
+        public enum gState
         {
-            Game,
-            Paused,
-            Menu
+            Game = 0,
+            Paused = 1,
+            Menu = 2
+        }
+
+        public static void Init()
+        {
+            GameState = gState.Menu;
+            GameMenus = new List<Menu>();
+
+            #region MainMenu
+                Menu MainMenu = new Menu();
+                Menu.Label TitleLabel = new Menu.Label("Tex..2DCraft!",fPixel, 200, 25);
+                TitleLabel.Text.Style = String2D.Styles.Underlined;
+                TitleLabel.Text.Size = 30;
+                MainMenu.Controls.Add(TitleLabel);
+                GameMenus.Add(MainMenu);
+            #endregion
+
+            ActiveMenu = MainMenu;
+
         }
     }
 }

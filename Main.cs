@@ -23,21 +23,32 @@ namespace _2DCraft
 			wnd.KeyReleased += new EventHandler<KeyEventArgs>(KeyboardManager.OnKeyRelease);
 			wnd.EnableKeyRepeat(false);
 			wnd.ShowMouseCursor(true);
+            GameManager.Init();
 
 			FileSystem.Directory = Properties.GetProperty("Directory=");
 
-			if (!FileSystem.LoadItems())
-			{
-				System.Windows.Forms.MessageBox.Show("items.txt was not found.\r\nCreated it.", "Fatal Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+			//if (!FileSystem.LoadItems())
+			//{
+            //    System.Windows.Forms.MessageBox.Show("items.txt was not found.\r\nCreated it.", "Fatal Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
 
-				return;
-			}
-
+            //    return;
+            //}
 			while (wnd.IsOpened())
 			{
 				wnd.DispatchEvents();
 				wnd.Clear(Color.Black);
-				wnd.Display();
+
+                if (GameManager.GameState == GameManager.gState.Menu)
+                {
+                    #region Draw active menu
+                    foreach (Menu.Control control in GameManager.ActiveMenu.Controls)
+                    {
+                        control.Draw();
+                    }
+                    #endregion
+                }
+
+                wnd.Display();
 			}
 		}
 		static void OnClose(object sender, EventArgs e)

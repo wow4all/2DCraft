@@ -12,3 +12,13 @@ D:\Coding Projects(Private)\CSharp\2DCraft\bin\Debug\sfmlnet-audio.dll
 D:\Coding Projects(Private)\CSharp\2DCraft\bin\Debug\sfmlnet-graphics.dll
 D:\Coding Projects(Private)\CSharp\2DCraft\bin\Debug\sfmlnet-window.dll
 D:\Coding Projects(Private)\CSharp\2DCraft\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\sgzfx\Desktop\git\Git_Repos\2DCraft\bin\Debug\2DCraft.exe.config
+C:\Users\sgzfx\Desktop\git\Git_Repos\2DCraft\obj\Debug\2DCraft.exe
+C:\Users\sgzfx\Desktop\git\Git_Repos\2DCraft\obj\Debug\2DCraft.pdb
+C:\Users\sgzfx\Desktop\git\Git_Repos\2DCraft\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\sgzfx\Desktop\git\Git_Repos\2DCraft\bin\Debug\csfml-graphics.dll
+C:\Users\sgzfx\Desktop\git\Git_Repos\2DCraft\bin\Debug\csfml-window.dll
+C:\Users\sgzfx\Desktop\git\Git_Repos\2DCraft\bin\Debug\Resources\Fonts\fipps.ttf
+C:\Users\sgzfx\Desktop\git\Git_Repos\2DCraft\bin\Debug\Resources\Fonts\volter.ttf
+C:\Users\sgzfx\Desktop\git\Git_Repos\2DCraft\bin\Debug\2DCraft.exe
+C:\Users\sgzfx\Desktop\git\Git_Repos\2DCraft\bin\Debug\2DCraft.pdb

@@ -86,8 +86,8 @@
     <Compile Include="Classes\FileSystem.cs" />
     <Compile Include="Classes\Inventory.cs" />
     <Compile Include="Classes\Item.cs" />
+    <Compile Include="Classes\Menu.cs" />
     <Compile Include="Classes\Properties.cs" />
-    <Compile Include="CraftManager.cs" />
     <Compile Include="Classes\GameManager.cs" />
     <Compile Include="Classes\KeyboardManager.cs" />
     <Compile Include="Main.cs" />
@@ -104,6 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Resources\Fonts\fipps.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Fonts\volter.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
