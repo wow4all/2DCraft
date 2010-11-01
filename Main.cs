@@ -10,10 +10,32 @@ namespace _2DCraft
 {
 	class _2DCraft
 	{
-
 		public static RenderWindow wnd;
 		
 		public static void Main()
+		{
+			if (!Initialize())
+			{
+				return;
+			}
+
+			while (wnd.IsOpened())
+			{
+				wnd.DispatchEvents();
+				wnd.Clear(Color.Black);
+				wnd.Display();
+			}
+		}
+
+		static void OnClose(object sender, EventArgs e)
+		{
+			RenderWindow wnd = (RenderWindow)sender;
+			wnd.Close();
+			if (Debugger.IsAttached)
+				Process.GetCurrentProcess().Kill();
+		}
+
+		static private bool Initialize()
 		{
 			wnd = new RenderWindow(new VideoMode(640, 480, 32), "2DCraft", Styles.Close);
 			wnd.UseVerticalSync(true);
@@ -30,22 +52,12 @@ namespace _2DCraft
 			{
 				System.Windows.Forms.MessageBox.Show("items.txt was not found.\r\nCreated it.", "Fatal Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
 
-				return;
+				return false;
 			}
 
-			while (wnd.IsOpened())
-			{
-				wnd.DispatchEvents();
-				wnd.Clear(Color.Black);
-				wnd.Display();
-			}
-		}
-		static void OnClose(object sender, EventArgs e)
-		{
-			RenderWindow wnd = (RenderWindow)sender;
-			wnd.Close();
-			if (Debugger.IsAttached)
-				Process.GetCurrentProcess().Kill();
+			Audio.PlayMusic("song01.ogg");
+
+			return true;
 		}
 	}
 }

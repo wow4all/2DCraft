@@ -20,6 +20,7 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -32,7 +33,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -64,28 +64,28 @@
   </Target>
   -->
   <ItemGroup>
-    <Reference Include="sfmlnet-audio, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\dlls\sfmlnet-audio.dll</HintPath>
+    <Reference Include="irrKlang.NET2.0">
+      <HintPath>..\..\..\Coding Libraries\CSharp\irrKlang-1.3.0\bin\dotnet-2.0\irrKlang.NET2.0.dll</HintPath>
     </Reference>
-    <Reference Include="sfmlnet-graphics, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\dlls\sfmlnet-graphics.dll</HintPath>
+    <Reference Include="sfmlnet-graphics">
+      <HintPath>bin\Debug\sfmlnet-graphics.dll</HintPath>
     </Reference>
-    <Reference Include="sfmlnet-window, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\dlls\sfmlnet-window.dll</HintPath>
+    <Reference Include="sfmlnet-window">
+      <HintPath>bin\Debug\sfmlnet-window.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Audio.cs" />
     <Compile Include="Classes\Craftable.cs" />
     <Compile Include="Classes\FileSystem.cs" />
     <Compile Include="Classes\Inventory.cs" />
     <Compile Include="Classes\Item.cs" />
+    <Compile Include="Classes\MapGenerator.cs" />
     <Compile Include="Classes\Properties.cs" />
     <Compile Include="Classes\GameManager.cs" />
     <Compile Include="Classes\KeyboardManager.cs" />
