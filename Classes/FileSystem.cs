@@ -9,6 +9,7 @@ namespace _2DCraft
 	static class FileSystem
 	{
 		static private string directory;
+		static public string DirectoryPath = System.IO.Directory.GetCurrentDirectory();
 
 		static private TextReader textReader;
 		static private TextWriter textWriter;

@@ -5,7 +5,18 @@ using System.Text;
 
 namespace _2DCraft
 {
-    class MapManager
-    {
-    }
+	class MapManager
+	{
+		public void SaveMap(string file)
+		{
+
+		}
+
+		public void LoadMap(string file)
+		{
+
+		}
+
+		
+	}
 }

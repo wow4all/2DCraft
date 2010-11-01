@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
 using System.Drawing;
 
 namespace _2DCraft
@@ -11,8 +10,8 @@ namespace _2DCraft
 	{
 		static public void GenerateMap()
 		{
-			Stopwatch watch = new Stopwatch();
-			watch.Start();
+			//Stopwatch watch = new Stopwatch();
+			//watch.Start();
 
 			const int width = 2048;
 			const int height = 384;
@@ -149,10 +148,10 @@ namespace _2DCraft
 
 			}
 
-			image.Save("out.png");
+			//image.Save("out.png");
 
-			watch.Stop();
-			Console.WriteLine(watch.ElapsedMilliseconds);
+			//watch.Stop();
+			//Console.WriteLine(watch.ElapsedMilliseconds);
 		}
 	}
 }
