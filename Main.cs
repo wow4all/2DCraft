@@ -10,23 +10,33 @@ namespace _2DCraft
 {
 	class _2DCraft
 	{
+
 		public static RenderWindow wnd;
+
 		
 		public static void Main()
 		{
-			if (!Initialize())
-			{
-				return;
-			}
+			Init();
 
 			while (wnd.IsOpened())
 			{
 				wnd.DispatchEvents();
 				wnd.Clear(Color.Black);
+
+				if (GameManager.GameState == GameManager.gState.Menu)
+				{
+					#region Draw active menu
+					foreach (Menu.Control control in GameManager.ActiveMenu.Controls)
+					{
+						control.Update();
+						control.Draw();
+					}
+					#endregion
+				}
+
 				wnd.Display();
 			}
 		}
-
 		static void OnClose(object sender, EventArgs e)
 		{
 			RenderWindow wnd = (RenderWindow)sender;
@@ -35,29 +45,34 @@ namespace _2DCraft
 				Process.GetCurrentProcess().Kill();
 		}
 
-		static private bool Initialize()
+		static private void Init()
 		{
 			wnd = new RenderWindow(new VideoMode(640, 480, 32), "2DCraft", Styles.Close);
 			wnd.UseVerticalSync(true);
-			wnd.SetFramerateLimit(80);
+			wnd.SetFramerateLimit(120);
 			wnd.Closed += new EventHandler(OnClose);
 			wnd.KeyPressed += new EventHandler<KeyEventArgs>(KeyboardManager.OnKeyPress);
 			wnd.KeyReleased += new EventHandler<KeyEventArgs>(KeyboardManager.OnKeyRelease);
 			wnd.EnableKeyRepeat(false);
 			wnd.ShowMouseCursor(true);
+			GameManager.Init();
 
 			FileSystem.Directory = Properties.GetProperty("Directory=");
 
-			if (!FileSystem.LoadItems())
+			if (!FileSystem.LoadPlanets())
 			{
 				System.Windows.Forms.MessageBox.Show("items.txt was not found.\r\nCreated it.", "Fatal Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
 
-				return false;
+				return;
 			}
 
-			//Audio.PlayMusic("song01.ogg");
-
-			return true;
+			foreach (Planet planet in MapManager.PlanetList) // This MUST be done AFTER loading the planets! (because of how the loading of textures for the items work.)
+			{
+				foreach (Item item in planet.PlanetItems)
+				{
+					item.Init();
+				}
+			}
 		}
 	}
 }

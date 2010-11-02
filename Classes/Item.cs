@@ -8,42 +8,29 @@ namespace _2DCraft
 	class Item
 	{
 		private string itemName;
+		private string textureLocation;
+		private string findString;
+		private string mineSound;
+		private string minedSound;
+
 		private int mineTime;
 		private int stackAmount;
 		private int findChance;
-		private string findString;
 		private int minTime;
 		private int maxTime;
+		private int totalRequiredItems;
+
 		private bool findable;
 		private bool removeOnCraft;
-		private string mineSound;
-		private string minedSound;
-		private List<Item> requiredItems;
-		private int totalRequiredItems;
-		private string textureLocation;
+
+		private List<Item> requiredEquippedItems;
+
 		private SFML.Graphics.Sprite texture;
 
-		private Position pos;
 		private float speed;
 		private float friction;
 
-		public struct Position
-		{
-			private int x;
-			private int y;
-
-			public int X
-			{
-				get { return x; }
-				set { x = value; }
-			}
-
-			public int Y
-			{
-				get { return y; }
-				set { y = value; }
-			}
-		}
+		public SFML.Graphics.Vector2 position;
 
 		#region Properties
 
@@ -113,10 +100,10 @@ namespace _2DCraft
 			set { minedSound = value; }
 		}
 
-		public List<Item> RequiredItems
+		public List<Item> RequiredEquippedItems
 		{
-			get { return requiredItems; }
-			set { requiredItems = value; }
+			get { return requiredEquippedItems; }
+			set { requiredEquippedItems = value; }
 		}
 
 		public int TotalRequiredItems
@@ -149,15 +136,18 @@ namespace _2DCraft
 			set { this.friction = value; }
 		}
 
+		public SFML.Graphics.Vector2 Position
+		{
+			get { return this.position; }
+			set { this.position = value; }
+		}
+
 		#endregion
 
-		public Item(string textureLocation, int x = 0, int y = 0, int width = 16, int height = 16, float speed = 1, float friction = 1, string IName = "DefaultItem", int MTime = 1, int SAmount = 64, int FChance = 100, string FString = "Mining", int MNTime = 0, int MXTime = 24, bool canFind = true, bool deleteOnCraft = true, string MSound = "default", string MDSound = "itemfound", string RItem = "none")
+		public Item(string textureLocation, int width = 16, int height = 16, float speed = 1, float friction = 1, string IName = "DefaultItem", int MTime = 1, int SAmount = 64, int FChance = 100, string FString = "Mining", int MNTime = 0, int MXTime = 24, bool canFind = true, bool deleteOnCraft = true, string MSound = "default", string MDSound = "itemfound", string RItem = "none")
 		{
-			this.pos = new Position();
-			this.pos.X = x;
-			this.pos.Y = y;
+			this.position = new SFML.Graphics.Vector2(0, 0);
 			this.textureLocation = textureLocation;
-			this.texture = new SFML.Graphics.Sprite(new SFML.Graphics.Image(textureLocation));
 			this.itemName = IName;
 			this.mineTime = MTime;
 			this.stackAmount = SAmount;
@@ -169,20 +159,25 @@ namespace _2DCraft
 			this.removeOnCraft = deleteOnCraft;
 			this.mineSound = MSound;
 			this.minedSound = MDSound;
-			this.requiredItems = new List<Item>();
+			this.requiredEquippedItems = new List<Item>();
 		}
 
 		public int GetTotalRequiredItems()
 		{
 			int output = 0;
 
-			foreach (Item item in this.RequiredItems)
+			foreach (Item item in this.RequiredEquippedItems)
 			{
 				output++;
 			}
 
 			this.TotalRequiredItems = output;
 			return output;
+		}
+
+		public void Init() // Initialize stuff that can only be initialized when we have all the data from parsing items.
+		{
+			this.texture = new SFML.Graphics.Sprite(new SFML.Graphics.Image(textureLocation));
 		}
 
 		public void Draw()

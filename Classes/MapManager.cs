@@ -5,14 +5,29 @@ using System.Text;
 
 namespace _2DCraft
 {
-	class MapManager
+	static class MapManager
 	{
-		public void SaveMap(string file)
+		static private List<Planet> planetList = new List<Planet>();
+		static private int currentTemperature;
+
+		static public List<Planet> PlanetList
+		{
+			get { return planetList; }
+			set { planetList = value; }
+		}
+
+		static public int CurrentTemperature
+		{
+			get { return currentTemperature; }
+			set { currentTemperature = value; }
+		}
+
+		static public void SaveMap(string file)
 		{
 
 		}
 
-		public void LoadMap(string file)
+		static public void LoadMap(string file)
 		{
 
 		}

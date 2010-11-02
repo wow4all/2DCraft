@@ -1,0 +1,36 @@
+[Planet]
+	BaseTemperature = 18
+	PlanetName = Sateda
+	
+	[Item]
+		ItemName = Rock
+		MineTime = 2
+		StackAmount = 32
+		ChanceToFind = 85
+		CanFind = True
+		RemoveOnCraft = True
+	[/Item]
+[/Planet]
+
+[Planet]
+	BaseTemperature = 25
+	PlanetName = Earth
+	
+	[Item]
+		ItemName = Grass
+		MineTime = 1
+		StackAmount = 64
+		ChanceToFind = 90
+		CanFind = True
+		RemoveOnCraft = True
+	[/Item]
+	
+	[Item]
+		ItemName = Dirt
+		MineTime = 2
+		StackAmount = 32
+		ChanceToFind = 85
+		CanFind = True
+		RemoveOnCraft = True
+	[/Item]
+[/Planet]

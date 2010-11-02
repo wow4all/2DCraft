@@ -86,6 +86,10 @@
     <Compile Include="Classes\Inventory.cs" />
     <Compile Include="Classes\Item.cs" />
     <Compile Include="Classes\MapGenerator.cs" />
+    <Compile Include="Classes\Math.cs" />
+    <Compile Include="Classes\Menu.cs" />
+    <Compile Include="Classes\Planet.cs" />
+    <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\Properties.cs" />
     <Compile Include="Classes\GameManager.cs" />
     <Compile Include="Classes\KeyboardManager.cs" />
