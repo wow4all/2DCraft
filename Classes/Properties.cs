@@ -51,6 +51,7 @@ namespace _2DCraft
 					{
 						output = line.Remove(0, propertyName.Length);
 						output = output.Replace("\r", "");
+						output = output.Replace(" ", "");
 						loadedProperties.Add(propertyName);
 
 						break;

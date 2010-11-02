@@ -13,6 +13,7 @@ namespace _2DCraft
 
 		public static RenderWindow wnd;
 
+		private static Stopwatch watch = new Stopwatch();
 		
 		public static void Main()
 		{
@@ -47,6 +48,8 @@ namespace _2DCraft
 
 		static private void Init()
 		{
+			watch.Start();
+
 			wnd = new RenderWindow(new VideoMode(640, 480, 32), "2DCraft", Styles.Close);
 			wnd.UseVerticalSync(true);
 			wnd.SetFramerateLimit(120);
@@ -73,6 +76,11 @@ namespace _2DCraft
 					item.Init();
 				}
 			}
+			Lua.Init(); // Prolonges initialization by atleast 100 ms.
+
+			watch.Stop();
+
+			Console.WriteLine(watch.ElapsedMilliseconds + " ms taken to initialize!", "Debugging Information", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
 		}
 	}
 }

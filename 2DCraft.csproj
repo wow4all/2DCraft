@@ -6,7 +6,7 @@
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{00FDA8BC-E4C7-48AF-BD56-D2DB5EDBF7F0}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>_2DCraft</RootNamespace>
     <AssemblyName>2DCraft</AssemblyName>
@@ -67,6 +67,10 @@
     <Reference Include="irrKlang.NET2.0">
       <HintPath>..\..\..\Coding Libraries\CSharp\irrKlang-1.3.0\bin\dotnet-2.0\irrKlang.NET2.0.dll</HintPath>
     </Reference>
+    <Reference Include="LuaInterface">
+      <HintPath>.\LuaInterface.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="sfmlnet-graphics">
       <HintPath>bin\Debug\sfmlnet-graphics.dll</HintPath>
     </Reference>
@@ -85,8 +89,9 @@
     <Compile Include="Classes\FileSystem.cs" />
     <Compile Include="Classes\Inventory.cs" />
     <Compile Include="Classes\Item.cs" />
+    <Compile Include="Classes\Lua.cs" />
     <Compile Include="Classes\MapGenerator.cs" />
-    <Compile Include="Classes\Math.cs" />
+    <Compile Include="Classes\GameMath.cs" />
     <Compile Include="Classes\Menu.cs" />
     <Compile Include="Classes\Planet.cs" />
     <Compile Include="Classes\Player.cs" />
@@ -104,6 +109,10 @@
     <Content Include="csfml-window.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="lua51.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LuaInterface.dll" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
