@@ -14,6 +14,8 @@ namespace _2DCraft
 		public static RenderWindow wnd;
 
 		private static Stopwatch watch = new Stopwatch();
+
+		private static Player ply;
 		
 		public static void Main()
 		{
@@ -21,6 +23,7 @@ namespace _2DCraft
 
 			while (wnd.IsOpened())
 			{
+				
 				wnd.DispatchEvents();
 				wnd.Clear(Color.Black);
 
@@ -33,6 +36,9 @@ namespace _2DCraft
 						control.Draw();
 					}
 					#endregion
+
+					ply.Update();
+					ply.Draw();
 				}
 
 				wnd.Display();
@@ -43,7 +49,7 @@ namespace _2DCraft
 			RenderWindow wnd = (RenderWindow)sender;
 			wnd.Close();
 			if (Debugger.IsAttached)
-				Process.GetCurrentProcess().Kill();
+				Process.GetCurrentProcess().Kill();	
 		}
 
 		static private void Init()
@@ -64,7 +70,14 @@ namespace _2DCraft
 
 			if (!FileSystem.LoadPlanets())
 			{
-				System.Windows.Forms.MessageBox.Show("items.txt was not found.\r\nCreated it.", "Fatal Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+				System.Windows.Forms.MessageBox.Show("planets.txt was not found.\r\nCreated it.", "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+
+				return;
+			}
+
+			if (!FileSystem.LoadCraftables())
+			{
+				System.Windows.Forms.MessageBox.Show("planets.txt was not found.\r\nCreated it.", "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
 
 				return;
 			}
@@ -76,11 +89,15 @@ namespace _2DCraft
 					item.Init();
 				}
 			}
-			Lua.Init(); // Prolonges initialization by atleast 100 ms.
 
+			//Lua.Init();
+			MapGenerator.GenerateMap_J3();
+			//Audio.PlayAudio("getout.ogg");
+
+			ply = new Player("Player", false, new Image(FileSystem.DirectoryPath + "\\" + FileSystem.Directory + "\\" + "textures\\player.png"));
 			watch.Stop();
 
-			Console.WriteLine(watch.ElapsedMilliseconds + " ms taken to initialize!", "Debugging Information", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+			Console.WriteLine(watch.ElapsedMilliseconds + " ms taken to initialize!");
 		}
 	}
 }

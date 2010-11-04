@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace _2DCraft
 {
 	static class MapGenerator
 	{
-		static public void GenerateMap()
+		#region Vbit's Generation algorithm
+		static public void GenerateMap_Vbitz()
 		{
 			//Stopwatch watch = new Stopwatch();
 			//watch.Start();
@@ -153,5 +155,29 @@ namespace _2DCraft
 			//watch.Stop();
 			//Console.WriteLine(watch.ElapsedMilliseconds);
 		}
+		#endregion
+
+		#region Dj-J3's Generation algorithm
+		public static void GenerateMap_J3()
+		{
+			Stopwatch watch = new Stopwatch();
+			watch.Start();
+
+
+
+			watch.Stop();
+			#region Stopwatch output
+			Console.Write(watch.ElapsedMilliseconds + " ms to generate map");
+			if (watch.ElapsedMilliseconds > 50)
+			{
+				Console.WriteLine(".");
+			}
+			else
+			{
+				Console.WriteLine("!!");
+			}
+			#endregion
+		}
+		#endregion
 	}
 }

@@ -178,11 +178,15 @@ namespace _2DCraft
 		public void Init() // Initialize stuff that can only be initialized when we have all the data from parsing items.
 		{
 			this.texture = new SFML.Graphics.Sprite(new SFML.Graphics.Image(textureLocation));
+
+			this.texture.Position = new SFML.Graphics.Vector2(0, 0);
+			this.texture.Width = 16;
+			this.texture.Height = 16;
 		}
 
 		public void Draw()
 		{
-			
+			_2DCraft.wnd.Draw(this.texture);
 		}
 	}
 }

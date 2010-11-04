@@ -34,7 +34,6 @@ namespace _2DCraft
 				}
 			}
 
-			tempList = null;
 			return output;
 		}
 

@@ -26,10 +26,21 @@ namespace _2DCraft
 			{
 				_2DCraft.wnd.Close();
 			}*/
+
+			if (input.IsKeyDown(SFML.Window.KeyCode.F2))
+			{
+				if (!System.IO.Directory.Exists(FileSystem.DirectoryPath + "\\" + FileSystem.Directory + "\\screenshots"))
+					System.IO.Directory.CreateDirectory(FileSystem.DirectoryPath + "\\" + FileSystem.Directory + "\\screenshots");
+
+				SFML.Graphics.Image image = _2DCraft.wnd.Capture();
+
+				if (image.SaveToFile(FileSystem.DirectoryPath + "\\" + FileSystem.Directory + "\\screenshots\\" + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" + DateTime.Now.Second + ".png"))
+					Console.WriteLine("Screenshot saved to " + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" + DateTime.Now.Second + ".png!");
+			}
 		}
 		public static void OnKeyRelease(object sender, EventArgs e)
 		{
-
+			
 		}
 	 }
 }

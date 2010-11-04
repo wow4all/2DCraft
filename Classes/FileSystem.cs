@@ -253,5 +253,125 @@ namespace _2DCraft
 
 			return true;
 		}
+
+		static public bool LoadCraftables()
+		{
+			bool insideCraftable = false;
+			bool insideCraftables = false;
+
+			if (!System.IO.Directory.Exists(directory))
+				System.IO.Directory.CreateDirectory(directory);
+
+			try
+			{
+				textReader = new StreamReader(directory + "\\planets.txt");
+				fileContent = textReader.ReadToEnd().Split('\n');
+
+				textReader.Close();
+			}
+			catch
+			{
+				textWriter = new StreamWriter(directory + "\\planets.txt");
+				textWriter.Close();
+
+				return false;
+			}
+			foreach (string line in fileContent)
+			{
+				string l = line.ToLower();
+				l = l.Replace(" ", "");
+				l = l.Replace("\r", "");
+				l = l.Replace("\t", "");
+				if (!insideCraftables)
+				{
+					if (l.StartsWith("[craftables]"))
+					{
+						insideCraftables = true;
+
+						craftable = new Craftable();
+
+						continue;
+					}
+				}
+				else
+				{
+					if (!insideCraftable)
+					{
+						if (l.StartsWith("[/craftables]"))
+						{
+							insideCraftables = false;
+
+							continue;
+						}
+
+						if (l.StartsWith("[craft]"))
+						{
+							insideCraftable = true;
+
+							continue;
+						}
+					}
+					else
+					{
+						if (l.StartsWith("[/craft]"))
+						{
+							MapManager.CraftableList.Add(craftable);
+
+							continue;
+						}
+
+						if (l.StartsWith("item="))
+						{
+							l = l.Remove(0, 5);
+							craftable.RequiredItemNames.Add(l);
+
+							continue;
+						}
+
+						if (l.StartsWith("amount="))
+						{
+							l = l.Remove(0, 7);
+							int output;
+
+							if(int.TryParse(l, out output))
+							{
+								output = int.Parse(l);
+							}
+
+							craftable.Amount = output;
+
+							continue;
+						}
+
+						if (l.StartsWith("newitem="))
+						{
+							bool _shouldBreak = false;
+							l = l.Remove(0, 8);
+
+							foreach (Planet planet in MapManager.PlanetList)
+							{
+								if (_shouldBreak)
+									break;
+
+								foreach (Item item in planet.PlanetItems)
+								{
+									if (item.ItemName.ToLower() == l.ToLower())
+									{
+										craftable.NewItem = item;
+
+										_shouldBreak = true;
+										break;
+									}
+								}
+							}
+
+							continue;
+						}
+					}
+				}
+			}
+
+			return true;
+		}
 	}
 }

@@ -8,6 +8,7 @@ namespace _2DCraft
 	class Audio
 	{
 		static private ISoundEngine soundEngine;
+		static private ISound sound;
 
 		static public bool Init()
 		{
@@ -26,21 +27,23 @@ namespace _2DCraft
 		[STAThread]
 		static public bool PlayAudio(string fileLocation)
 		{
+			fileLocation = FileSystem.DirectoryPath + "\\" + FileSystem.Directory + "\\music\\" + fileLocation;
 			try
 			{
 				if (System.IO.File.Exists(fileLocation))
 				{
 					soundEngine = new ISoundEngine();
-					soundEngine.Play2D(fileLocation, false, false, StreamMode.NoStreaming, false);
+					soundEngine.SoundVolume = GameManager.Volume;
+					sound = soundEngine.Play2D(fileLocation, false, false, StreamMode.NoStreaming, false);
 				}
 				else
 					return false;
 
 				return true;
 			}
-			catch
+			catch (Exception e)
 			{
-
+				System.Windows.Forms.MessageBox.Show(e.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
 				return false;
 			}
 		}
@@ -54,14 +57,15 @@ namespace _2DCraft
 				if (System.IO.File.Exists(fileLocation))
 				{
 					soundEngine = new ISoundEngine();
-					soundEngine.Play2D(fileLocation, false, false, StreamMode.Streaming, false);
+					soundEngine.SoundVolume = GameManager.Volume;
+					sound = soundEngine.Play2D(fileLocation, false, false, StreamMode.Streaming, false);
 				}
 				else
 					return false;
 
 				return true;
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				System.Windows.Forms.MessageBox.Show(e.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
 				return false;

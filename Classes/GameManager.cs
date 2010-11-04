@@ -13,6 +13,8 @@ namespace _2DCraft
 		public static List<Menu> GameMenus;
 		public static Menu ActiveMenu;
 
+		public static float Volume = 0.75f; // Should be able to edit this ingame.
+
 		private static SFML.Graphics.String2D mainMenuTitle = new String2D("2DCraft!", fPixel, 30);
 
 		public enum gState

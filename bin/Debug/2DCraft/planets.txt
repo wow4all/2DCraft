@@ -33,4 +33,33 @@
 		CanFind = True
 		RemoveOnCraft = True
 	[/Item]
+	
+	[Item]
+		ItemName = Log
+		MineTime = 4
+		StackAmount = 64
+		ChanceToFind = 85
+		CanFind = True
+		RemoveOnCraft = True
+	[/Item]
+	
+	[Item]
+		ItemName = Wood
+		MineTime = 0
+		StackAmount = 64
+		ChanceToFind = 0
+		CanFind = False
+		RemoveOnCraft = True
+	[/Item]
 [/Planet]
+
+[Craftables]
+	[Craft]
+		Texture = default
+		Item = Log
+		Amount = 4
+		NewItem = Wood
+	[/Craft]
+	
+	...
+[/Craftables]
