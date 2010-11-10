@@ -99,8 +99,8 @@ namespace _2DCraft
 			}
 			else
 			{
-				this.sprite.Width = image.Width;
-				this.sprite.Height = image.Height;
+				this.sprite.Width = 32;
+				this.sprite.Height = 64;
 			}
 
 			this.inventoryList = new List<Item>();
@@ -111,6 +111,26 @@ namespace _2DCraft
 			this.sprite.Position = pos;
 		}
 
+		public float GetX()
+		{
+			return this.sprite.Position.X;
+		}
+
+		public float GetY()
+		{
+			return this.sprite.Position.Y;
+		}
+
+		public void SetX(float value)
+		{
+			this.sprite.Position = new Vector2(value, GetY());
+		}
+
+		public void SetY(float value)
+		{
+			this.sprite.Position = new Vector2(GetX(), value);
+		}
+
 		public Vector2 GetPosition()
 		{
 			return this.sprite.Position;
@@ -119,12 +139,6 @@ namespace _2DCraft
 		public void Hurt(int amount)
 		{
 			this.health -= amount;
-
-			if (!sandbox)
-			{
-				if (this.health <= 0)
-					this.alive = false;
-			}
 		}
 
 		public void Draw()
@@ -136,7 +150,12 @@ namespace _2DCraft
 		{
 			if (alive)
 			{
-				
+				if (this.health <= 0)
+				{
+					this.alive = false;
+				}
+
+
 			}
 			else
 			{

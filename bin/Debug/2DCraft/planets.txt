@@ -9,6 +9,8 @@
 		ChanceToFind = 85
 		CanFind = True
 		RemoveOnCraft = True
+		Texture = dirt
+		TopTexture = grass
 	[/Item]
 [/Planet]
 
@@ -55,7 +57,6 @@
 
 [Craftables]
 	[Craft]
-		Texture = default
 		Item = Log
 		Amount = 4
 		NewItem = Wood

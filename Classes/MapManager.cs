@@ -8,14 +8,22 @@ namespace _2DCraft
 	static class MapManager
 	{
 		static private List<Planet> planetList = new List<Planet>();
+		static private List<Item> itemList = new List<Item>();
 		static private List<Craftable> craftableList = new List<Craftable>();
 
-		static private int currentTemperature;
+		static private List<SFML.Graphics.Sprite> spriteList = new List<SFML.Graphics.Sprite>();
+
 
 		static public List<Planet> PlanetList
 		{
 			get { return planetList; }
 			set { planetList = value; }
+		}
+
+		static public List<Item> ItemList
+		{
+			get { return itemList; }
+			set { itemList = value; }
 		}
 
 		static public List<Craftable> CraftableList
@@ -24,12 +32,12 @@ namespace _2DCraft
 			set { craftableList = value; }
 		}
 
-		static public int CurrentTemperature
+		static public List<SFML.Graphics.Sprite> SpriteList
 		{
-			get { return currentTemperature; }
-			set { currentTemperature = value; }
+			get { return spriteList; }
+			set { spriteList = value; }
 		}
-
+		
 		static public void SaveMap(string fileName)
 		{
 
@@ -39,7 +47,5 @@ namespace _2DCraft
 		{
 
 		}
-
-		
 	}
 }

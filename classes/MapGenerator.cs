@@ -2,182 +2,233 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
 using System.Diagnostics;
+using System.IO;
+using System.Threading;
 
 namespace _2DCraft
 {
-	static class MapGenerator
+	class MapGenerator
 	{
-		#region Vbit's Generation algorithm
-		static public void GenerateMap_Vbitz()
+		private int[,] tiles;
+
+		private int xSize;
+		private int ySize;
+
+		private int y;
+		private int x;
+
+		private int groundHeight;
+
+		public int[,] Tiles
 		{
-			//Stopwatch watch = new Stopwatch();
-			//watch.Start();
+			get { return this.tiles; }
+			set { this.tiles = value; }
+		}
 
-			const int width = 2048;
-			const int height = 384;
-			const int waterheight = 228;
-			const int maxheight = 338;
-			const int minheight = 178;
-			const int lavamin = 358;
-			const int lavamax = 378;
-			const int lavaheight = 373;
+		public int XSize
+		{
+			get { return this.xSize; }
+			set { this.xSize = value; }
+		}
 
-			int lastheight = 330;
-			int lastlava = 368;
+		public int YSize
+		{
+			get { return this.ySize; }
+			set { this.ySize = value; }
+		}
 
-			Bitmap image = new Bitmap(width, height);
-			Random rand = new Random();
+		public int GroundHeight
+		{
+			get { return this.groundHeight; }
+			set { this.groundHeight = value; }
+		}
 
-			Color grass = Color.FromArgb(163, 182, 199);
-			Color dirt = Color.FromArgb(121, 99, 73);
-			Color water = Color.FromArgb(100, 146, 185);
-			Color sky = Color.FromArgb(163, 182, 199);
-			Color rock = Color.FromArgb(96, 96, 96);
-			Color lava = Color.Red;
-			Color lavatop = Color.DarkRed;
-			Color cave = Color.FromArgb(40, 40, 40);
+		public int Y
+		{
+			get { return this.y; }
+			set { this.y = value; }
+		}
 
-			for (int x = 0; x < width; x++)
+		public int X
+		{
+			get { return this.x; }
+			set { this.x = value; }
+		}
+
+		public void Init(int xSize, int ySize)
+		{
+			this.tiles = new int[xSize, ySize];
+			this.xSize = xSize;
+			this.ySize = ySize;
+
+			//Console.WriteLine(xSize + " " + ySize);
+		}
+
+		public void GenerateMap(double maxAir, int seed)
+		{
+			Stopwatch stopwatch = new Stopwatch();
+			stopwatch.Start();
+
+			bool first = true;
+			//TextWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "\\mapOutput.txt");
+			Random random = new Random(seed);
+			int height;
+
+			for (int y = 0; y < this.ySize; y++)
 			{
-				for (int y = waterheight; y < height; y++)
+				for (int x = 0; x < this.xSize; x++)
 				{
-					image.SetPixel(x, y, water);
+					// Create a random mountain seed. (This is in the air area)
+					if (y <= this.ySize * maxAir)
+					{
+						if (random.NextDouble() < 0.005 && y > 10) // Create a mountain seed
+						{
+							this.tiles[x, y] = 1;
+						}
+						else
+							this.tiles[x, y] = 0;
+						//writer.Write(this.tiles[x, y]);
+					}
+
+					// Create the ground. (Below air area)
+					else
+					{
+						// Set the ground height so that we can be sure we won't make the mountains reach to the bottom of the map.
+						if (first)
+						{
+							this.groundHeight = y;
+							first = false;
+							Console.WriteLine("Ground height = " + y);
+
+							height = random.Next(-5, 5);
+							try
+							{
+								this.tiles[x, y + height] = 1;
+							}
+							catch
+							{
+							}
+						}
+
+						if (y == this.groundHeight)
+						{
+							height = random.Next(-5, 5);
+							try
+							{
+								this.tiles[x, y + height] = 1;
+							}
+							catch
+							{
+							}
+						}
+						else
+						{
+							this.tiles[x, y] = 1;
+						}
+
+						//writer.Write(this.tiles[x, y]);
+
+					}
+
 				}
-				for (int y = 0; y < waterheight; y++)
+				//writer.Write("\n");
+			}
+
+			// Create stuff that requires the basic map to have been generated. (mountains etc)
+			for (int y = 0; y < this.groundHeight; y++)
+			{
+				for (int x = 0; x < this.xSize; x++)
 				{
-					image.SetPixel(x, y, sky);
+					if (y <= this.ySize * maxAir)
+					{
+						try
+						{
+							if (this.tiles[x, y] == 1 && y <= this.groundHeight)
+							{
+								//Console.WriteLine("Found mountain at " + x + " " + y + ".");
+
+								// Make all this.tiles underneath the mountain seed a solid tile.
+								for (int _y = y; _y < this.groundHeight; _y++)
+								{
+									this.tiles[x, _y] = 1;
+									//writer.Write(this.tiles[x, _y]);
+								}
+							}
+							// Create a downhill from the left side.
+							else if (this.tiles[x + 1, y - 1] == 1)
+							{
+								this.tiles[x, y] = 1;
+							}
+
+							// Create a downhill from the right side.
+							else if (this.tiles[x - 1, y - 1] == 1)
+							{
+								this.tiles[x, y] = 1;
+							}
+						}
+						catch (IndexOutOfRangeException e)
+						{
+							//Console.WriteLine(e.Message + "(at " + x + " " + y + ")");
+						}
+					}
 				}
 			}
 
-			for (int x = 0; x < width; x++)
+			//TODO: Liquify map
+			for (int y = 0; y < this.ySize; y++)
 			{
-				bool goodnumber = false;
-				int randnum = lastheight;
-
-				while (goodnumber == false)
+				for (int x = 0; x < this.xSize; x++)
 				{
-					switch (rand.Next(1, 40))
+					if (y >= this.groundHeight && this.tiles[x, y] != 1)
+					{
+						if (random.NextDouble() < 0.25 && this.tiles[x, y - 1] == 2)
+							this.tiles[x, y] = 2;
+						else
+							this.tiles[x, y] = 1;
+					}
+				}
+
+			}
+
+			Console.WriteLine("{" + this.xSize + ", " + this.ySize + "}");
+
+			//writer.Close();
+			stopwatch.Stop();
+
+			Console.WriteLine(stopwatch.ElapsedMilliseconds + "ms to generate map!");
+		}
+
+		public void Draw(uint _x, uint _y, uint _blockSize)
+		{
+			for (int y = 0; y < this.ySize; y++)
+			{
+				for (int x = 0; x < this.xSize; x++)
+				{
+					switch(this.tiles[x, y])
 					{
 						case 1:
+							if (this.tiles[x, y - 1] == 0)
+							{
+								MapManager.ItemList[0].TopTexture.Position = new SFML.Graphics.Vector2(_x + (x * _blockSize), _y + (y * _blockSize));
+								_2DCraft.wnd.Draw(MapManager.ItemList[0].TopTexture);
+							}
+							else
+							{
+								MapManager.ItemList[0].Texture.Position = new SFML.Graphics.Vector2(_x + (x * _blockSize), _y + (y * _blockSize));
+								_2DCraft.wnd.Draw(MapManager.ItemList[0].Texture);
+							}
+
+							break;
+
 						case 2:
-						case 3:
-						case 4:
-						case 5:
-							randnum = lastheight - 1;
-							break;
-						case 6:
-						case 7:
-						case 8:
-						case 9:
-						case 10:
-							randnum = rand.Next(lastheight - 1, lastheight + 1);
-							break;
-						case 11:
-						case 12:
-						case 13:
-							randnum = rand.Next(lastheight - 5, lastheight + 5);
-							break;
-						case 14:
-						case 15:
-							randnum = rand.Next(lastheight - 8, lastheight + 8);
-							break;
-						default:
+							MapManager.ItemList[0].Texture.Position = new SFML.Graphics.Vector2(_x + (x * _blockSize), _y + (y * _blockSize));
+							_2DCraft.wnd.Draw(MapManager.ItemList[0].Texture);
+
 							break;
 					}
-					if (randnum < maxheight & randnum > minheight)
-					{
-						goodnumber = true;
-						lastheight = randnum;
-					}
 				}
-
-				int randrock = rand.Next(10, 20) + randnum;
-
-				goodnumber = false;
-				int lavadepth = lastlava;
-
-				while (goodnumber == false)
-				{
-					switch (rand.Next(1, 10))
-					{
-						case 1:
-							lavadepth = rand.Next(lastlava - 1, lastlava + 1);
-							break;
-						case 2:
-							lavadepth = rand.Next(lastlava - 2, lastlava + 2);
-							break;
-						default:
-							lavadepth = lastlava;
-							break;
-					}
-					if (lavadepth < lavamax & lavadepth > lavamin)
-					{
-						goodnumber = true;
-						lastlava = lavadepth;
-					}
-				}
-
-				for (int y = randnum + 2; y < randrock; y++)
-				{
-					image.SetPixel(x, y, dirt);
-				}
-
-				for (int y = randrock; y < lavadepth; y++)
-				{
-					image.SetPixel(x, y, rock);
-				}
-
-				for (int y = lavadepth; y < lavaheight; y++)
-				{
-					image.SetPixel(x, y, cave);
-				}
-
-				for (int y = lavaheight + 1; y < height; y++)
-				{
-					image.SetPixel(x, y, lava);
-				}
-
-				image.SetPixel(x, lavaheight, lavatop);
-
-				if (randnum < waterheight)
-				{
-					image.SetPixel(x, randnum, grass);
-					image.SetPixel(x, randnum + 1, grass);
-				}
-
-
 			}
-
-			//image.Save("out.png");
-
-			//watch.Stop();
-			//Console.WriteLine(watch.ElapsedMilliseconds);
 		}
-		#endregion
-
-		#region Dj-J3's Generation algorithm
-		public static void GenerateMap_J3()
-		{
-			Stopwatch watch = new Stopwatch();
-			watch.Start();
-
-
-
-			watch.Stop();
-			#region Stopwatch output
-			Console.Write(watch.ElapsedMilliseconds + " ms to generate map");
-			if (watch.ElapsedMilliseconds > 50)
-			{
-				Console.WriteLine(".");
-			}
-			else
-			{
-				Console.WriteLine("!!");
-			}
-			#endregion
-		}
-		#endregion
 	}
 }

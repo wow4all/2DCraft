@@ -9,6 +9,7 @@ namespace _2DCraft
 	{
 		private string itemName;
 		private string textureLocation;
+		private string topTextureLocation;
 		private string findString;
 		private string mineSound;
 		private string minedSound;
@@ -19,6 +20,7 @@ namespace _2DCraft
 		private int minTime;
 		private int maxTime;
 		private int totalRequiredItems;
+		private int property;
 
 		private bool findable;
 		private bool removeOnCraft;
@@ -26,11 +28,10 @@ namespace _2DCraft
 		private List<Item> requiredEquippedItems;
 
 		private SFML.Graphics.Sprite texture;
+		private SFML.Graphics.Sprite topTexture;
 
 		private float speed;
 		private float friction;
-
-		public SFML.Graphics.Vector2 position;
 
 		#region Properties
 
@@ -114,14 +115,26 @@ namespace _2DCraft
 
 		public string TextureLocation
 		{
-			get { return textureLocation; }
-			set { textureLocation = value; }
+			get { return this.textureLocation; }
+			set { this.textureLocation = value; }
+		}
+
+		public string TopTextureLocation
+		{
+			get { return this.topTextureLocation; }
+			set { this.topTextureLocation = value; }
 		}
 
 		public SFML.Graphics.Sprite Texture
 		{
 			get { return this.texture; }
 			set { this.texture = value; }
+		}
+
+		public SFML.Graphics.Sprite TopTexture
+		{
+			get { return this.topTexture; }
+			set { this.topTexture = value; }
 		}
 
 		public float Speed
@@ -136,18 +149,18 @@ namespace _2DCraft
 			set { this.friction = value; }
 		}
 
-		public SFML.Graphics.Vector2 Position
+		public int Property
 		{
-			get { return this.position; }
-			set { this.position = value; }
+			get { return this.property; }
+			set { this.property = value; }
 		}
 
 		#endregion
 
-		public Item(string textureLocation, int width = 16, int height = 16, float speed = 1, float friction = 1, string IName = "DefaultItem", int MTime = 1, int SAmount = 64, int FChance = 100, string FString = "Mining", int MNTime = 0, int MXTime = 24, bool canFind = true, bool deleteOnCraft = true, string MSound = "default", string MDSound = "itemfound", string RItem = "none")
+		public Item(string textureLocation, string topTextureLocation, int width = 16, int height = 16, float speed = 1, float friction = 1, string IName = "DefaultItem", int MTime = 1, int SAmount = 64, int FChance = 100, string FString = "Mining", int MNTime = 0, int MXTime = 24, bool canFind = true, bool deleteOnCraft = true, string MSound = "default", string MDSound = "itemfound", string RItem = "none")
 		{
-			this.position = new SFML.Graphics.Vector2(0, 0);
 			this.textureLocation = textureLocation;
+			this.topTextureLocation = topTextureLocation;
 			this.itemName = IName;
 			this.mineTime = MTime;
 			this.stackAmount = SAmount;
@@ -178,10 +191,14 @@ namespace _2DCraft
 		public void Init() // Initialize stuff that can only be initialized when we have all the data from parsing items.
 		{
 			this.texture = new SFML.Graphics.Sprite(new SFML.Graphics.Image(textureLocation));
+			this.topTexture = new SFML.Graphics.Sprite(new SFML.Graphics.Image(topTextureLocation));
 
-			this.texture.Position = new SFML.Graphics.Vector2(0, 0);
-			this.texture.Width = 16;
-			this.texture.Height = 16;
+			this.texture.Width = 32;
+			this.texture.Height = 32;
+			this.texture.Image.Smooth = false;
+			this.topTexture.Width = 32;
+			this.topTexture.Height = 32;
+			this.topTexture.Image.Smooth = false;
 		}
 
 		public void Draw()

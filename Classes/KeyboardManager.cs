@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SFML.Window;
 
 namespace _2DCraft
 {
@@ -36,6 +37,43 @@ namespace _2DCraft
 
 				if (image.SaveToFile(FileSystem.DirectoryPath + "\\" + FileSystem.Directory + "\\screenshots\\" + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" + DateTime.Now.Second + ".png"))
 					Console.WriteLine("Screenshot saved to " + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" + DateTime.Now.Second + ".png!");
+			}
+
+			if (input.IsKeyDown(SFML.Window.KeyCode.Q))
+			{
+				
+				//TileManager.AddTile(50, 50, MapManager.ItemList[0]); // Debug
+				Console.WriteLine("Added " + MapManager.ItemList[0].ItemName.ToLower() + "!");
+			}
+
+			if (input.IsKeyDown(SFML.Window.KeyCode.E))
+			{
+				//TileManager.RemoveTile(50, 50); // Debug
+				Console.WriteLine("Removed " + MapManager.ItemList[0].ItemName.ToLower() + "!");
+			}
+
+			// Right
+			if (input.IsKeyDown(KeyCode.D))
+			{
+				GameManager.Camera.ViewCamera.Move(new SFML.Graphics.Vector2(32, 0));
+			}
+
+			// Left
+			if (input.IsKeyDown(KeyCode.A))
+			{
+				GameManager.Camera.ViewCamera.Move(new SFML.Graphics.Vector2(-32, 0));
+			}
+
+			// Up
+			if (input.IsKeyDown(KeyCode.W))
+			{
+				GameManager.Camera.ViewCamera.Move(new SFML.Graphics.Vector2(0, -32));
+			}
+
+			// Down
+			if (input.IsKeyDown(KeyCode.S))
+			{
+				GameManager.Camera.ViewCamera.Move(new SFML.Graphics.Vector2(0, 32));
 			}
 		}
 		public static void OnKeyRelease(object sender, EventArgs e)

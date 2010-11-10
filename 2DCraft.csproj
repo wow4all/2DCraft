@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Audio.cs" />
+    <Compile Include="Classes\Camera.cs" />
     <Compile Include="Classes\Craftable.cs" />
     <Compile Include="Classes\FileSystem.cs" />
     <Compile Include="Classes\Inventory.cs" />
@@ -98,6 +99,8 @@
     <Compile Include="Classes\Properties.cs" />
     <Compile Include="Classes\GameManager.cs" />
     <Compile Include="Classes\KeyboardManager.cs" />
+    <Compile Include="Classes\Tile.cs" />
+    <Compile Include="Classes\TileManager.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Classes\ItemManager.cs" />
     <Compile Include="Classes\MapManager.cs" />

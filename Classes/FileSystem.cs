@@ -86,7 +86,7 @@ namespace _2DCraft
 						{
 							try
 							{
-								item = new Item(DirectoryPath + "\\" + directory + "\\textures\\default.png");
+								item = new Item(DirectoryPath + "\\" + directory + "\\textures\\default.png", DirectoryPath + "\\" + directory + "\\textures\\default.png");
 							}
 							catch
 							{
@@ -145,9 +145,16 @@ namespace _2DCraft
 						{
 							l = l.Remove(0, 8);
 
-							item.TextureLocation = l;
+							item.TextureLocation = DirectoryPath + "\\" + Directory + "\\textures\\" + l + ".png";
 
 							continue;
+						}
+
+						if (l.StartsWith("toptexture="))
+						{
+							l = l.Remove(0, 11);
+
+							item.TopTextureLocation = DirectoryPath + "\\" + Directory + "\\textures\\" + l + ".png";
 						}
 
 						if (l.StartsWith("minetime="))

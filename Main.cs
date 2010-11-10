@@ -15,8 +15,14 @@ namespace _2DCraft
 
 		private static Stopwatch watch = new Stopwatch();
 
-		private static Player ply;
-		
+		private static MapGenerator mapGen = new MapGenerator();
+
+		public static MapGenerator MapGen
+		{
+			get { return mapGen; }
+			set { mapGen = value; }
+		}
+
 		public static void Main()
 		{
 			Init();
@@ -25,21 +31,10 @@ namespace _2DCraft
 			{
 				
 				wnd.DispatchEvents();
-				wnd.Clear(Color.Black);
+				wnd.Clear(new Color(125, 175, 255, 255));
 
-				if (GameManager.GameState == GameManager.gState.Menu)
-				{
-					#region Draw active menu
-					foreach (Menu.Control control in GameManager.ActiveMenu.Controls)
-					{
-						control.Update();
-						control.Draw();
-					}
-					#endregion
-
-					ply.Update();
-					ply.Draw();
-				}
+				GameManager.Update();
+				GameManager.Draw();
 
 				wnd.Display();
 			}
@@ -49,22 +44,21 @@ namespace _2DCraft
 			RenderWindow wnd = (RenderWindow)sender;
 			wnd.Close();
 			if (Debugger.IsAttached)
-				Process.GetCurrentProcess().Kill();	
+				Process.GetCurrentProcess().Kill();
 		}
 
 		static private void Init()
 		{
 			watch.Start();
 
-			wnd = new RenderWindow(new VideoMode(640, 480, 32), "2DCraft", Styles.Close);
-			wnd.UseVerticalSync(true);
+			wnd = new RenderWindow(new VideoMode(1280, 720, 32), "2DCraft", Styles.Close);
+			wnd.UseVerticalSync(false);
 			wnd.SetFramerateLimit(120);
 			wnd.Closed += new EventHandler(OnClose);
 			wnd.KeyPressed += new EventHandler<KeyEventArgs>(KeyboardManager.OnKeyPress);
 			wnd.KeyReleased += new EventHandler<KeyEventArgs>(KeyboardManager.OnKeyRelease);
 			wnd.EnableKeyRepeat(false);
 			wnd.ShowMouseCursor(true);
-			GameManager.Init();
 
 			FileSystem.Directory = Properties.GetProperty("Directory=");
 
@@ -87,14 +81,15 @@ namespace _2DCraft
 				foreach (Item item in planet.PlanetItems)
 				{
 					item.Init();
+					MapManager.ItemList.Add(item);
 				}
 			}
 
-			//Lua.Init();
-			MapGenerator.GenerateMap_J3();
+			Lua.Init();
+
+			GameManager.Init();
 			//Audio.PlayAudio("getout.ogg");
 
-			ply = new Player("Player", false, new Image(FileSystem.DirectoryPath + "\\" + FileSystem.Directory + "\\" + "textures\\player.png"));
 			watch.Stop();
 
 			Console.WriteLine(watch.ElapsedMilliseconds + " ms taken to initialize!");
